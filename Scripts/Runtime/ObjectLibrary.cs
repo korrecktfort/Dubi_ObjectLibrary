@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Dubi.Singleton;
+using Dubi.SingletonSpace;
 using System.Linq;
 
 namespace Dubi.Library
