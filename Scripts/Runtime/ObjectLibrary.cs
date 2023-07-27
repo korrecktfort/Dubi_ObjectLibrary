@@ -2,6 +2,7 @@
 using UnityEngine;
 using Dubi.SingletonSpace;
 using System.Linq;
+using Rewired;
 
 namespace Dubi.Library
 {
@@ -44,30 +45,26 @@ namespace Dubi.Library
             }
         }       
         
-        public void RegisterSourceComponent(ISource iSource)
-        {
-            List<ISource> list = this.sourceComponents.ToList();
+        //public void RegisterSourceComponent(ISource iSource)
+        //{
+        //    List<ISource> list = this.sourceComponents.ToList();
 
-            if (!list.Contains(iSource))
-            {
-                list.Add(iSource);
-                this.sourceComponents = list.ToArray();
-            }
-        }
+        //    if (!list.Contains(iSource))
+        //    {
+        //        list.Add(iSource);
+        //        this.sourceComponents = list.ToArray();
+        //    }
+        //}
 
-        public T GetSourceComponent<T>() where T : Component
-        {
+        public T GetSourceComponent<T>(string libraryName) where T : Component
+        {            
+            LoadLibrary(libraryName);
+
             foreach (ISource source in this.sourceComponents.ToArray())
                 if (source is T)
                     return source as T;
 
             return null;
-        }
-
-        public T GetSourceComponent<T>(string libraryName) where T : Component
-        {
-            LoadLibrary(libraryName);
-            return GetSourceComponent<T>();
         }
     }
 }
