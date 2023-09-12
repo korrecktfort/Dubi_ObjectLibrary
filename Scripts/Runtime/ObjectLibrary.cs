@@ -13,6 +13,9 @@ namespace Dubi.Library
         
         public void LoadLibrary(string libraryName)
         {
+            if (Quitting)
+                return;
+
             foreach(string instantiated in this.instantiated)
             {
                 if (instantiated == libraryName)
@@ -58,6 +61,9 @@ namespace Dubi.Library
 
         public T GetSourceComponent<T>(string libraryName) where T : Component
         {            
+            if(Quitting)
+                return null;
+
             LoadLibrary(libraryName);
 
             foreach (ISource source in this.sourceComponents.ToArray())
